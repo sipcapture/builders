@@ -22,7 +22,7 @@ cd /usr/src
 git clone https://github.com/sipcapture/heplify-server
 cd heplify-server
 go get -u -d -v github.com/sipcapture/heplify-server/...
-CGO_ENABLED=1 GOOS=linux GOARCH=amd64 GO111MODULE=on go build -a -o heplify-server -v cmd/heplify-server/*.go
+CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -a --ldflags '-linkmode external -extldflags "-static -s -w"' -o heplify-server -v cmd/heplify-server/*.go
 chmod +x heplify-server
 
 if [ $? -eq 0 ]
